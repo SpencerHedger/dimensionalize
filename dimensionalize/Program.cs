@@ -49,9 +49,25 @@ namespace dimensionalize
             if (args.Length <= 1)
             {
                 Console.WriteLine("Usage: dimensionalize <filename> [options] <col-spec> [col-spec]...[col-spec]");
+                Console.WriteLine("\t{0}\t{1}", "<col-spec>", "Defines the how to map a column in the source data file to dimensions.");
                 Console.WriteLine("\t{0}\t{1}", "--sanitize", "Tidy up values stripping out quotes and commas.");
                 Console.WriteLine("\t{0}\t{1}", "--quote-labels", "Put quotations around all text labels.");
                 Console.WriteLine("\t{0}\t{1}", "--ignore-unknown-columns", "When a column does not map correctly, do not produce any output.");
+                Console.WriteLine("\t{0}\t{1}", "--new-headings=custom1,custom2...etc.", "New column headings for first row of output.");
+                Console.WriteLine();
+                Console.WriteLine("Example:");
+                Console.WriteLine("\tCSV file (test.csv) contains data columns of: Boys,BoysGCSE,Girls,GirlsGCSE,AllGCSE,All");
+                Console.WriteLine();
+                Console.WriteLine("\tdimensionalize test.csv --sanitize \"Boys,Girls,All\" \"GCSE,");
+                Console.WriteLine();
+                Console.WriteLine("\tNotice how the case where there is no GCSE there is just an \"All\", to handle this where we put a");
+                Console.WriteLine("\tcomma and no label, the match is an empty string.");
+                Console.WriteLine();
+                Console.WriteLine("\tTo rename value labels when mapped to dimensions, assign as follows:");
+                Console.WriteLine();
+                Console.WriteLine("\tdimensionalize test.csv --sanitize \"Boys=Male,Girls=Female,All\" \"GCSE,=No GCSE");
+                Console.WriteLine("\tThis would remap the dimensionalized labels from Boys to Male etc. and where there is no label");
+                Console.WriteLine("\tin the case of no GCSE, the label \"No GCSE\" will be used.");
                 return;
             }
 
