@@ -3,7 +3,13 @@
 ## Summary
 Convert a CSV file from multiple values per row, into single dimensionalized value per row.
 
-The conversion is performed using column heading pattern matching.
+The conversion is performed using column heading pattern matching against all permutations all `col-spec`,
+in the order in which they were listed.
+
+Another point to note is that column 1 in `datafile` rows is considered a dimension. It is always
+retained and written as the first dimension in the resulting value per row output. In future versions
+of this utility, I will likely add an option to enable a custom number of initial columns to be treated
+as dimensions, be that 0, 1 (default) or more.
 
 ```
 Usage: dimensionalize <filename> [options] <col-spec> [col-spec]...[col-spec]
